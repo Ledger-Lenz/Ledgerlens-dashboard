@@ -30,8 +30,9 @@ Hybrid on-chain fraud detection for the Stellar DEX — detecting wash trading a
 13. [Testing](#13-testing)
 14. [Roadmap](#14-roadmap)
 15. [Why This Matters](#15-why-this-matters)
-16. [Contributing](#16-contributing)
-17. [References](#17-references)
+16. [Related Repositories](#16-related-repositories)
+17. [Contributing](#17-contributing)
+18. [References](#18-references)
 
 ---
 
@@ -584,7 +585,35 @@ LedgerLens is not a surveillance tool. It is an **open-source public good** — 
 
 ---
 
-## 16. Contributing
+## 16. Related Repositories
+
+LedgerLens is split across focused repositories. Each can be developed, deployed, and integrated independently.
+
+| Repository | Role | Link |
+|------------|------|------|
+| **Ledgerlens-dashboard** *(this repo)* | Web dashboard — live score lookup, alert feed, asset risk ranking | [github.com/Ledger-Lenz/Ledgerlens-dashboard](https://github.com/Ledger-Lenz/Ledgerlens-dashboard) |
+| **Ledgerlens-api** | FastAPI REST service — `/score`, `/alerts`, `/assets`, `/webhooks` | [github.com/Ledger-Lenz/Ledgerlens-api](https://github.com/Ledger-Lenz/Ledgerlens-api) |
+| **Ledgerlens-core** | Detection engine — Benford engine, ML ensemble, SHAP explainer, scoring pipeline | [github.com/Ledger-Lenz/Ledgerlens-core](https://github.com/Ledger-Lenz/Ledgerlens-core) |
+| **Ledgerlens-contract** | Soroban smart contract — on-chain risk score registry, composable `get_score` | [github.com/Ledger-Lenz/Ledgerlens-contract](https://github.com/Ledger-Lenz/Ledgerlens-contract) |
+| **Ledgerlens-data** | Data layer — Horizon SSE streamer, historical loader, account resolver, Pydantic models | [github.com/Ledger-Lenz/Ledgerlens-data](https://github.com/Ledger-Lenz/Ledgerlens-data) |
+
+### How the Repos Connect
+
+```
+Ledgerlens-data  ──→  Ledgerlens-core  ──→  Ledgerlens-contract
+       │                     │
+       └──────────→  Ledgerlens-api  ──→  Ledgerlens-dashboard
+```
+
+- **data** ingests raw trade records from Stellar Horizon
+- **core** runs Benford + ML detection and produces `RiskScore` objects
+- **contract** stores scores on-chain for composability with other Stellar protocols
+- **api** serves scores and alerts over HTTP
+- **dashboard** consumes the API and renders the visual interface
+
+---
+
+## 17. Contributing
 
 Contributions are welcome. We are actively looking for collaborators with experience in:
 
@@ -611,7 +640,7 @@ Please open an issue before starting significant work so we can align on approac
 
 ---
 
-## 17. References
+## 18. References
 
 - Benford, F. (1938) 'The law of anomalous numbers', *Proceedings of the American Philosophical Society*, 78(4), pp. 551–572.
 - Al Ali, A. et al. (2023) 'A powerful predicting model for financial statement fraud based on optimized XGBoost ensemble learning technique', *Applied Sciences*, 13(4).
