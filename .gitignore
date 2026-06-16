@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+.env
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+
+# Models
+models/*.pkl
+models/*.joblib
+models/*.json
+!models/.gitkeep
+
+# Rust / Cargo
+target/
+Cargo.lock
+
+# Soroban
+*.wasm
+*.optimized.wasm
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Data
+data/
+*.csv
+*.parquet
