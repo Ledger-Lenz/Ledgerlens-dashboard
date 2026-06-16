@@ -5,7 +5,7 @@
 [![Python](https://img.shields.io/badge/Python-3.11+-yellow?logo=python)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/API-FastAPI-teal?logo=fastapi)](https://fastapi.tiangolo.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Drip Wave](https://img.shields.io/badge/Drip%20Wave-Builder%20Programme-orange)](https://dripwave.stellar.org)
+
 
 > *"On a transparent ledger, every transaction is visible. LedgerLens makes them legible."*
 
