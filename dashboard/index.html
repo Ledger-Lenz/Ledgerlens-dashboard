@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LedgerLens — Stellar DEX Fraud Detection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header>
+    <span class="logo">LedgerLens</span>
+    <span class="tagline">Stellar DEX Wash Trade Detection</span>
+    <span class="status-dot" id="status-dot" title="API status"></span>
+  </header>
+
+  <main>
+
+    <!-- Stats row -->
+    <div class="stats" id="stats-row">
+      <div class="stat">
+        <div class="value" id="stat-wallets">—</div>
+        <div class="label">Wallets Scored</div>
+      </div>
+      <div class="stat">
+        <div class="value" id="stat-flagged">—</div>
+        <div class="label">Flagged (24h)</div>
+      </div>
+      <div class="stat">
+        <div class="value" id="stat-assets">—</div>
+        <div class="label">Assets Monitored</div>
+      </div>
+      <div class="stat">
+        <div class="value" id="stat-avg">—</div>
+        <div class="label">Avg Risk Score</div>
+      </div>
+    </div>
+
+    <!-- Score lookup -->
+    <div class="card">
+      <h2>Score Lookup</h2>
+      <div class="search-row">
+        <input id="wallet-input" type="text" placeholder="Wallet address (G…)" />
+        <input id="pair-input" type="text" placeholder="Asset pair (e.g. XLM:native/USDC:GA5Z…)" />
+        <button id="lookup-btn">Score</button>
+      </div>
+
+      <div class="score-result" id="score-result">
+        <div class="gauge-wrap">
+          <div class="gauge" id="score-gauge">
+            <span class="score-num" id="score-num">—</span>
+            <span class="score-label">/ 100</span>
+          </div>
+          <div id="score-risk-label" style="font-size:12px;color:var(--text-muted)"></div>
+        </div>
+
+        <div class="score-detail">
+          <div class="flag-row" id="flag-row"></div>
+          <ul class="features-list" id="features-list"></ul>
+        </div>
+      </div>
+
+      <div id="lookup-error" style="color:var(--red);font-size:13px;margin-top:8px;display:none"></div>
+    </div>
+
+    <!-- Recent alerts -->
+    <div class="card">
+      <h2>Recent Alerts <span style="font-weight:400;color:var(--text-muted);font-size:12px">(last 24h, score ≥ 75)</span></h2>
+      <table class="alerts-table">
+        <thead>
+          <tr>
+            <th>Wallet</th>
+            <th>Asset Pair</th>
+            <th>Score</th>
+            <th>Benford</th>
+            <th>ML</th>
+            <th>Flagged At</th>
+          </tr>
+        </thead>
+        <tbody id="alerts-body">
+          <tr><td colspan="6"><div class="empty-state">Loading…</div></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Asset risk ranking -->
+    <div class="card">
+      <h2>Asset Risk Ranking
+        <span style="float:right;font-weight:400;color:var(--text-muted);font-size:12px">
+          Window:
+          <select id="window-select" style="background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:4px;padding:2px 6px;">
+            <option value="1h">1h</option>
+            <option value="24h" selected>24h</option>
+            <option value="7d">7d</option>
+          </select>
+        </span>
+      </h2>
+      <div class="asset-grid" id="asset-grid">
+        <div class="empty-state">Loading…</div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
